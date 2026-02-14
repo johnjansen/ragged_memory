@@ -207,6 +207,96 @@ ram demo hello Alice --uppercase
 ram demo hello --count 3 Bob
 ```
 
+## Usage
+
+### Storage Scopes
+
+RAM provides two distinct storage scopes for organizing your memories:
+
+#### Project-Local Memory (`.ragged_memory/`)
+
+Store information specific to the current project:
+
+```bash
+# Initialize local storage in your project
+ram init
+
+# This creates .ragged_memory/ in the current directory
+# Local memories are only accessible within this project
+```
+
+**When to use local scope:**
+- Project-specific architecture decisions
+- API endpoints and data models for this codebase
+- Team conventions for this project
+- Configuration patterns specific to this application
+
+#### User-Global Memory (`~/.ragged_memory/`)
+
+Store personal knowledge accessible from anywhere:
+
+```bash
+# Global storage is auto-initialized on first use
+# No explicit init command needed
+
+# Access global scope with --global flag
+ram --global <command>
+```
+
+**When to use global scope:**
+- Personal coding preferences and patterns
+- Reusable configurations and snippets
+- General knowledge applicable across projects
+- Tool configurations and workflows
+
+### Scope Selection
+
+Control which storage scope to use:
+
+```bash
+# Default behavior: uses local scope if in a project, global otherwise
+ram <command>
+
+# Explicitly use global scope
+ram --global <command>
+ram -g <command>
+
+# Explicitly use local scope
+ram --local <command>
+ram -l <command>
+```
+
+### Commands
+
+#### Initialize Project Storage
+
+```bash
+# Create .ragged_memory/ in current directory
+ram init
+
+# Safe to run multiple times (idempotent)
+ram init  # Shows "already initialized" if exists
+```
+
+**Note:** Global storage (`~/.ragged_memory/`) is automatically initialized on first use—no init command needed.
+
+#### Index Files
+
+```bash
+# Index a file into local storage
+ram add document.txt
+
+# Index a file into global storage
+ram --global add ~/notes/reference.md
+
+# Index with explicit scope
+ram --local add README.md
+```
+
+**Supported file types**: Text files with UTF-8 encoding (`.txt`, `.md`, `.py`, `.js`, etc.)
+**File size limit**: 10 MB maximum
+**Processing**: Files are automatically chunked, embedded, and stored for semantic search
+
 ## Open Questions
 
 These are product decisions we need to make:
