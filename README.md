@@ -179,6 +179,34 @@ RAM is designed around these beliefs:
 
 **Not a knowledge graph.** No complex relationships or ontologies. Just store text, search by meaning.
 
+## Installation
+
+### Development Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/ragged_memory.git
+cd ragged_memory
+
+# Install in development mode
+pip install -e .
+```
+
+### Quick Start
+
+```bash
+# Check version
+ram --version
+
+# Get help
+ram --help
+
+# Try the demo command
+ram demo hello
+ram demo hello Alice --uppercase
+ram demo hello --count 3 Bob
+```
+
 ## Open Questions
 
 These are product decisions we need to make:
